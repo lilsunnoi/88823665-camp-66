@@ -1,0 +1,11 @@
+/* mystyle.css */
+
+h1 {
+    color: aqua;
+}
+h1 :hover{
+    background-color: yellowgreen;
+}
+body{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
