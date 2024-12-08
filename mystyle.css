@@ -1,11 +1,104 @@
 /* mystyle.css */
+/* สไตล์ทั่วไปสำหรับ body */
+body {
+    background: linear-gradient(to right, #9b59b6, #e91e63, #f44336);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Noto Sans Thai', sans-serif; /* เปลี่ยนฟอนต์เป็นเนนเสำ */
+}
 
-h1 {
-    color: aqua;
+/* สไตล์สำหรับกล่องฟอร์ม */
+.bg-white {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 20rem; /* max-w-sm */
 }
-h1 :hover{
-    background-color: yellowgreen;
+
+/* สไตล์สำหรับหัวข้อ */
+.text-pink-600 {
+    color: #d5006d; /* Tailwind's pink-600 */
 }
-body{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+/* สไตล์สำหรับ Input และ Textarea */
+input[type="text"],
+input[type="date"],
+input[type="file"],
+textarea,
+select {
+    width: 66.666667%; /* w-2/3 */
+    padding: 0.5rem;
+    border: 1px solid #d1d5db; /* border-gray-300 */
+    border-radius: 0.25rem;
+    transition: ring 0.2s;
+    font-family: 'Poppins', sans-serif; /* เปลี่ยนฟอนต์สำหรับ input */
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    ring: 2px solid #3b82f6; /* focus:ring-2 focus:ring-blue-500 */
+}
+
+/* สไตล์สำหรับปุ่ม */
+button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    color: white;
+    cursor: pointer;
+}
+
+.bg-red-500 {
+    background-color: #f44336; /* Tailwind's red-500 */
+}
+
+.bg-red-500:hover {
+    background-color: #e53935; /* Tailwind's red-600 */
+}
+
+.bg-green-500 {
+    background-color: #4caf50; /* Tailwind's green-500 */
+}
+
+.bg-green-500:hover {
+    background-color: #43a047; /* Tailwind's green-600 */
+}
+
+/* สไตล์สำหรับ Checkbox และ Radio */
+.form-checkbox,
+.form-radio {
+    color: #3b82f6; /* text-blue-500 */
+}
+
+/* คลาส Utility สำหรับ Flexbox */
+.flex {
+    display: flex;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.mt-6 {
+    margin-top: 1.5rem;
+}
+
+.ml-2 {
+    margin-left: 0.5rem;
+}
+
+.ml-4 {
+    margin-left: 1rem;
 }

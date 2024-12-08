@@ -1,67 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-    <style>
-        h1 {
-            color: rebeccapurple;
-        }
-    </style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workshop #HTML - FORM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="mystyle.css">
 </head>
 <body>
-    <h1>Workshop #HTML - FORM</h1>
-    <form>
-        <div style="margin-bottom: 10px;">
-            <label style="display: inline-block; width: 100px; color: blue;">ชื่อ</label>
-            <input type="text" style="width: 200px;" />
-        </div>
-        <div style="margin-bottom: 10px;">
-            <label style="display: inline-block; width: 100px;">สกุล</label>
-            <input type="text" style="width: 200px;" />
-        </div>
-        <div style="margin-bottom: 10px;">
-            <label style="display: inline-block; width: 100px;">วัน/เดือน/ปีเกิด</label>
-            <input type="date" style="width: 200px;" />
-        </div>
-        <div style="margin-bottom: 10px;">
-            <label style="display: inline-block; width: 100px;">อายุ</label>
-            <input type="text" style="width: 200px;" />
-        </div>
-        <div style="margin-bottom: 10px;">
-            <label style="display: inline-block; width: 100px;">เพศ</label>
-            <input type="radio" name="gender" /> ชาย
-            <input type="radio" name="gender" style="margin-left: 20px;" /> หญิง
-        </div>
-        <div style="margin-bottom: 10px;">
-            <label style="display: inline-block; width: 100px;">รูป</label>
-            <input type="file" />
-        </div>
-        <div style="margin-bottom: 10px;">
-            <label style="display: inline-block; width: 100px;">ที่อยู่</label>
-            <textarea style="width: 200px; height: 60px;"></textarea>
-        </div>
-        <div style="margin-bottom: 10px;">
-            <label style="display: inline-block; width: 100px;">สีที่ชอบ</label>
-            <select style="width: 200px;">
-                <option>สีแดง</option>
-            </select>
-        </div>
-        <div style="margin-bottom: 10px;">
-            <label style="display: inline-block; width: 100px;">แนวเพลงที่ชอบ</label>
-            <input type="radio" name="music" /> เพื่อชีวิต
-            <input type="radio" name="music" style="margin-left: 20px;" /> ลูกทุ่ง
-            <input type="radio" name="music" style="margin-left: 20px;" /> อื่นๆ
-        </div>
-        <div style="margin-bottom: 10px;">
-            <input type="checkbox" /> ยินยอมให้เก็บข้อมูล
-        </div>
-        <div style="margin-top: 20px;">
-            <button type="reset" style="margin-right: 10px;">Reset</button>
-            <button type="submit">Submit</button>
-        </div>
-    </form>
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
+        <h1 class="text-2xl font-bold text-pink-600 mb-6 text-center" style="font-family: 'Roboto', sans-serif;">Workshop #HTML - FORM</h1>
+        <form>
+            <div class="mb-4 flex items-center">
+                <label class="block text-black mb-1 w-1/3">ชื่อ</label>
+                <input type="text" class="w-2/3 p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500" style="font-family: 'Poppins', sans-serif;" />
+            </div>
+            <div class="mb-4 flex items-center">
+                <label class="block mb-1 w-1/3">สกุล</label>
+                <input type="text" class="w-2/3 p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500" style="font-family: 'Poppins', sans-serif;" />
+            </div>
+            <div class="mb-4 flex items-center">
+                <label class="block mb-1 w-1/3">วัน/เดือน/ปีเกิด</label>
+                <input type="date" class="w-2/3 p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500" style="font-family: 'Poppins', sans-serif;" />
+            </div>
+            <div class="mb-4 flex items-center">
+                <label class="block mb-1 w-1/3">อายุ</label>
+                <input type="text" class="w-2/3 p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500" style="font-family: 'Poppins', sans-serif;" />
+            </div>
+            <div class="mb-4 flex items-center">
+                <label class="block mb-1 w-1/3">เพศ</label>
+                <div class="w-2/3">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="gender" class="form-radio" />
+                        <span class="ml-2">ชาย</span>
+                    </label>
+                    <label class="inline-flex items-center ml-4">
+                        <input type="radio" name="gender" class="form-radio" />
+                        <span class="ml-2">หญิง</span>
+                    </label>
+                </div>
+            </div>
+            <div class="mb-4 flex items-center">
+                <label class="block mb-1 w-1/3">รูป</label>
+                <input type="file" class="w-2/3 p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500" />
+            </div>
+            <div class="mb-4 flex items-center">
+                <label class="block mb-1 w-1/3">ที่อยู่</label>
+                <textarea class="h-20 w-2/3 p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500" style="font-family: 'Poppins', sans-serif;"></textarea>
+            </div>
+            <div class="mb-4 flex items-center">
+                <label class="block mb-1 w-1/3">สีที่ช อบ</label>
+                <select class="w-2/3 p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500">
+                    <option>สีแดง</option>
+                    <option>สีน้ำเงิน</option>
+                    <option>สีเขียว</option>
+                    <option>สีเหลือง</option>
+                    <option>สีม่วง</option>
+                </select>
+            </div>
+            <div class="mb-4 flex items-center">
+                <label class="block mb-1 w-1/3">แนวเพลงที่ชอบ</label>
+                <div class="w-2/3">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="music" class="form-radio" />
+                        <span class="ml-2">เพื่อชีวิต</span>
+                    </label>
+                    <label class="inline-flex items-center ml-4">
+                        <input type="radio" name="music" class="form-radio" />
+                        <span class="ml-2">ลูกทุ่ง</span>
+                    </label>
+                    <label class="inline-flex items-center ml-4">
+                        <input type="radio" name="music" class="form-radio" />
+                        <span class="ml-2">ป๊อป</span>
+                    </label>
+                    <label class="inline-flex items-center ml-4">
+                        <input type="radio" name="music" class="form-radio" />
+                        <span class="ml-2">ร็อค</span>
+                    </label>
+                    <label class="inline-flex items-center ml-4">
+                        <input type="radio" name="music" class="form-radio" />
+                        <span class="ml-2">อื่นๆ</span>
+                    </label>
+                </div>
+            </div>
+            <div class="mb-4 flex items-center">
+                <label class="block mb-1 w-1/3"></label>
+                <label class="inline-flex items-center w-2/3">
+                    <input type="checkbox" class="form-checkbox" />
+                    <span class="ml-2">ยินยอมให้เก็บข้อมูล</span>
+                </label>
+            </div>
+            <div class="mt-6 flex justify-between">
+                <button type="reset" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Reset</button>
+                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Submit</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
