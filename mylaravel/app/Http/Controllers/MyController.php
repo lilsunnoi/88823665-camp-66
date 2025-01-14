@@ -6,12 +6,23 @@ use Illuminate\Http\Request;
 
 class MyController extends Controller
 {
-    private function myprivate(){
-        return 1;
-    }
-    function myfunction(Request $reg , $var1=""){
+    public function myfunction(Request $reg, $var1 = null)
+    {
         $data['myinput'] = $reg->input('myinput');
-        $data['myvalue'] = $var1;
-        return view('myview' , $data);
+
+        // ตรวจสอบว่ามีการส่งค่า input และเป็นตัวเลข
+        if ($reg->has('myinput') && is_numeric($reg->input('myinput'))) {
+            $num = intval($reg->input('myinput'));
+            $table = [];
+            for ($i = 1; $i <= 12; $i++) {
+                $table[] = "$num x $i = " . ($num * $i);
+            }
+            $data['table'] = $table;
+        } else {
+            $data['table'] = null; // ไม่มีตารางหากยังไม่กรอกหรือกรอกไม่ถูกต้อง
+        }
+
+        return view('myview', $data);
     }
 }
+
