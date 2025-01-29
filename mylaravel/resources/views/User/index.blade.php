@@ -24,7 +24,11 @@
                 <td>{{ $user->email }}</td>
                 <td>
                     <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-warning">Edit</a>
-                    <button class="btn btn-danger">Delete</button>
+                    <form action="{{ route('users.delete') }}" method="POST" style="display:inline;">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $user->id }}">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </td>
               </tr>
               <?php } ?>

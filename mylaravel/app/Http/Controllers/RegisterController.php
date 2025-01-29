@@ -27,6 +27,7 @@ class RegisterController extends Controller
             'password' => $req->password
         ]);
 
-        return redirect('/users');
+        return redirect('/register');
     }
+
 }

@@ -7,6 +7,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 
+Route::post('/users/delete',
+ [UserController::class, 'delete'])->name('users.delete');
+Route::get('/users',
+ [UserController::class, 'index']);
 Route::get('/login',
     [LoginController::class, 'index']);
 Route::get('/register',
@@ -19,7 +23,10 @@ Route::get('/',
     [HomeController::class, 'index']);
 Route::get('/users',
     [UserController::class, 'index']);
-
+Route::get('/users/edit/{id}',
+ [UserController::class, 'edit'])->name('users.edit');
+ Route::post('/users/edit',
+  [UserController::class, 'edit_action'])->name('users.update');
 Route::get('/mycontroller/{id?}',
     [MyController::class, 'myfunction']);
 Route::post('/mycontroller/{id?}',
