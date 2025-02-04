@@ -21,14 +21,25 @@ class UserController extends Controller
     }
 
     function edit_action(Request $req){
-       // print_r($req->input());
         $muser = User::find($req->id);
-        $muser-> name = $req ->name;
-        $muser-> email = $req ->email;
-        $muser-> password = $req ->password;
+
+        if (!$muser) {
+            return redirect('/users')->with('error', 'User not found!');
+        }
+
+        $muser->name = $req->name;
+        $muser->email = $req->email;
+
+        // เช็กว่าผู้ใช้กรอกรหัสผ่านใหม่หรือไม่
+        if ($req->filled('password')) {
+            $muser->password = bcrypt($req->password);
+        }
+
         $muser->save();
+
         return redirect('/users')->with('success', 'User updated successfully!');
     }
+
 
     function delete(Request $req){
         $user = User::find($req->id);
