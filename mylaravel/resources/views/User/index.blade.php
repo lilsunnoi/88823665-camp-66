@@ -17,21 +17,21 @@
               </tr>
             </thead>
             <tbody>
-             <?php foreach ($users as $index => $user) { ?>
+             @foreach ($users as $index => $user)
               <tr class="align-middle">
                 <td>{{ $index+1 }}.</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
                     <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-warning">Edit</a>
-                    <form action="{{ route('users.delete') }}" method="POST" style="display:inline;">
+                    <form action="{{ route('users.delete') }}" method="POST" style="display:inline;" id="delete-form-{{ $user->id }}">
                         @csrf
                         <input type="hidden" name="id" value="{{ $user->id }}">
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $user->id }})">Delete</button>
                     </form>
                 </td>
               </tr>
-              <?php } ?>
+              @endforeach
             </tbody>
           </table>
         </div>
@@ -49,4 +49,40 @@
       <!-- /.card -->
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+    });
+
+    function confirmDelete(userId) {
+        swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If the user confirms, submit the form to delete the user
+                document.getElementById('delete-form-' + userId).submit();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelled",
+                    text: "The user is safe :)",
+                    icon: "error"
+                });
+            }
+        });
+    }
+</script>
 @endsection

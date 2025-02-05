@@ -17,17 +17,17 @@
               </tr>
             </thead>
             <tbody>
-             <?php foreach ($users as $index => $user) { ?>
-              <tr class="align-middle">
+             @foreach ($users as $index => $user)
+              <tr id="user-row-{{ $user->id }}" class="align-middle">
                 <td>{{ $index+1 }}.</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
                     <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-warning">Edit</a>
-                    <button class="btn btn-danger">Delete</button>
+                    <button class="btn btn-danger" onclick="confirmDelete({{ $user->id }})">Delete</button>
                 </td>
               </tr>
-              <?php } ?>
+              @endforeach
             </tbody>
           </table>
         </div>
@@ -45,4 +45,5 @@
       <!-- /.card -->
     </div>
 </div>
+
 @endsection

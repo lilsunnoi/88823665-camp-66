@@ -26,17 +26,13 @@ class UserController extends Controller
         if (!$muser) {
             return redirect('/users')->with('error', 'User not found!');
         }
-
         $muser->name = $req->name;
         $muser->email = $req->email;
-
         // เช็กว่าผู้ใช้กรอกรหัสผ่านใหม่หรือไม่
         if ($req->filled('password')) {
             $muser->password = bcrypt($req->password);
         }
-
         $muser->save();
-
         return redirect('/users')->with('success', 'User updated successfully!');
     }
 
