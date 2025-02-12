@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 
+
 Route::post('/users/delete',
  [UserController::class, 'delete'])->name('users.delete');
 Route::get('/users',
@@ -35,9 +36,11 @@ Route::post('/mycontroller/{id?}',
     Route::get('/error500', function (){
         abort(500, 'Internal Server Error');
     });
+
+    Route::get('/user', function () {
+        return view('users');
+    });
 Route::get('/hello/{id?}',
     function ($val="") {
      return "<h1>Hello World $val</h1>";
-
-
 });
