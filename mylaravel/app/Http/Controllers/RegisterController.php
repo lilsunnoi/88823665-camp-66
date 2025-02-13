@@ -10,7 +10,7 @@ class RegisterController extends Controller
 {
     //
     function index(){
-        return view('register');
+        return view(view: 'register');
     }
 
     function create(Request $req){

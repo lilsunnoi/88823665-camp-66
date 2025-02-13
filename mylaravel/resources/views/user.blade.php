@@ -3,8 +3,13 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
+
+      <div class="alert alert-info">
+          <strong>คุณเข้าสู่ระบบเป็น:</strong> {{ Auth::user()->name }} ({{ Auth::user()->email }})
+      </div>
+
       <div class="card mb-12">
-        <div class="card-header"><h3 class="card-title"></h3></div>
+        <div class="card-header"><h3 class="card-title">รายชื่อผู้ใช้</h3></div>
         <!-- /.card-header -->
         <div class="card-body">
           <table class="table table-bordered">
@@ -41,6 +46,7 @@
             <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
           </ul>
         </div>
+        
       </div>
       <!-- /.card -->
     </div>

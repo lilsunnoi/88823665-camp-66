@@ -3,10 +3,10 @@
 @section('styles')
     <style>
         :root {
-            --primary-color: #4A90E2; /* สีน้ำเงิน */
-            --secondary-color: #3A4D75; /* สีเทาเข้ม */
-            --light-gray: #f4f7fa; /* สีเทาอ่อน */
-            --dark-gray: #4b4f55; /* สีเทาเข้ม */
+            --primary-color: #4A90E2;
+            --secondary-color: #3A4D75;
+            --light-gray: #f4f7fa;
+            --dark-gray: #4b4f55;
         }
 
         body {
@@ -161,84 +161,98 @@
 
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.getElementById('register-form').addEventListener('submit', function(event) {
-            let name = $('#name').val().trim();
-            let email = $('#email').val().trim();
-            let password = $('#password').val().trim();
-            let checkbox = $('#flexCheckDefault').prop('checked');
-            let isValid = true;
+        $(document).ready(function() {
+            $('#register-form').on('submit', function(event) {
+                event.preventDefault(); // ป้องกันการโหลดหน้าใหม่
 
-            // ตรวจสอบ Name ต้องไม่ว่าง
-            if (name === "") {
-                $('#invalid-name').show();
-                $('#name').addClass('is-invalid');
-                isValid = false;
-            } else {
-                $('#invalid-name').hide();
-                $('#name').removeClass('is-invalid');
-            }
+                let name = $('#name').val().trim();
+                let email = $('#email').val().trim();
+                let password = $('#password').val().trim();
+                let checkbox = $('#flexCheckDefault').prop('checked');
+                let isValid = true;
 
-            // ตรวจสอบ Email ต้องมี '@' และ '.'
-            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(email)) {
-                $('#email').addClass('is-invalid');
-                if (!$('#invalid-email').length) {
-                    $('#email').after(
-                        '<div class="invalid-feedback" id="invalid-email">กรุณาระบุอีเมลให้ถูกต้อง</div>');
+                $('.invalid-feedback').hide();
+                $('.is-invalid').removeClass('is-invalid');
+
+                // ตรวจสอบ Name ต้องไม่ว่าง
+                if (name === "") {
+                    $('#name').addClass('is-invalid');
+                    $('#invalid-name').text("กรุณากรอกชื่อ").show();
+                    isValid = false;
                 }
-                $('#invalid-email').show();
-                isValid = false;
-            } else {
-                $('#email').removeClass('is-invalid');
-                $('#invalid-email').hide();
-            }
 
-            // ตรวจสอบ Password ต้องมี ตัวเลข, ตัวพิมพ์เล็ก, ตัวพิมพ์ใหญ่
-            let passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)$/;
-            if (!passwordPattern.test(password)) {
-                $('#password').addClass('is-invalid');
-                if (!$('#invalid-password').length) {
-                    $('#password').after(
-                        '<div class="invalid-feedback" id="invalid-password">รหัสผ่านต้องมี ตัวเลข ตัวพิมพ์เล็ก และตัวพิมพ์ใหญ่</div>'
-                        );
+                // ตรวจสอบ Email ต้องมี '@' และ '.'
+                let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    $('#email').addClass('is-invalid');
+                    if (!$('#invalid-email').length) {
+                        $('#email').after('<div class="invalid-feedback" id="invalid-email">กรุณาระบุอีเมลให้ถูกต้อง</div>');
+                    }
+                    $('#invalid-email').show();
+                    isValid = false;
                 }
-                $('#invalid-password').show();
-                isValid = false;
-            } else {
-                $('#password').removeClass('is-invalid');
-                $('#invalid-password').hide();
-            }
 
-            // ตรวจสอบ Checkbox ต้องถูกติ๊ก
-            if (!checkbox) {
-                $('#flexCheckDefault').addClass('is-invalid');
-                if (!$('#invalid-checkbox').length) {
-                    $('#flexCheckDefault').after(
-                        '<div class="invalid-feedback d-block" id="invalid-checkbox">กรุณายอมรับเงื่อนไข</div>');
+                // ตรวจสอบ Password ต้องมี ตัวเลข และ ตัวอักษร
+                let passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d).+$/;
+                if (!passwordPattern.test(password)) {
+                    $('#password').addClass('is-invalid');
+                    if (!$('#invalid-password').length) {
+                        $('#password').after('<div class="invalid-feedback" id="invalid-password">รหัสผ่านต้องมี ตัวเลข และ ตัวอักษร (พิมพ์เล็กหรือพิมพ์ใหญ่)</div>');
+                    }
+                    $('#invalid-password').show();
+                    isValid = false;
                 }
-                $('#invalid-checkbox').show();
-                isValid = false;
-            } else {
-                $('#flexCheckDefault').removeClass('is-invalid');
-                $('#invalid-checkbox').hide();
-            }
 
-            // ถ้าไม่ผ่านการตรวจสอบ ให้หยุดการส่งฟอร์ม
-            if (!isValid) {
-                event.preventDefault();
-                return;
-            }
+                // ตรวจสอบ Checkbox ต้องถูกติ๊ก
+                if (!checkbox) {
+                    $('#flexCheckDefault').addClass('is-invalid');
+                    if (!$('#invalid-checkbox').length) {
+                        $('#flexCheckDefault').after('<div class="invalid-feedback d-block" id="invalid-checkbox">กรุณายอมรับเงื่อนไข</div>');
+                    }
+                    $('#invalid-checkbox').show();
+                    isValid = false;
+                }
 
-            // ถ้าผ่านการตรวจสอบ, แสดงข้อความลงทะเบียนสำเร็จ
-            event.preventDefault();
-            Swal.fire({
-                title: "ลงทะเบียนสำเร็จ!",
-                text: "กำลังนำคุณไปยังหน้าใช้งาน...",
-                icon: "success",
-                confirmButtonText: "ไปต่อ"
-            }).then(() => {
-                window.location.href = "{{ url('/users') }}";
+                if (!isValid) {
+                    return; // ถ้าตรวจสอบไม่ผ่าน ให้หยุดการส่งฟอร์ม
+                }
+
+                // ส่งข้อมูลไปที่เซิร์ฟเวอร์
+                $.ajax({
+                    url: "{{ url('/register') }}",
+                    type: "POST",
+                    data: $('#register-form').serialize(),
+                    success: function(response) {
+                        Swal.fire({
+                            title: "ลงทะเบียนสำเร็จ!",
+                            text: "กำลังนำคุณไปยังหน้าใช้งาน...",
+                            icon: "success",
+                            confirmButtonText: "ไปต่อ"
+                        }).then(() => {
+                            window.location.href = "{{ url('/users') }}";
+                        });
+                    },
+                    error: function(xhr) {
+                        let errors = xhr.responseJSON.errors;
+                        if (errors) {
+                            if (errors.name) {
+                                $('#name').addClass('is-invalid');
+                                $('#invalid-name').text(errors.name[0]).show();
+                            }
+                            if (errors.email) {
+                                $('#email').addClass('is-invalid');
+                                $('#invalid-email').text(errors.email[0]).show();
+                            }
+                            if (errors.password) {
+                                $('#password').addClass('is-invalid');
+                                $('#invalid-password').text(errors.password[0]).show();
+                            }
+                        }
+                    }
+                });
             });
         });
     </script>
