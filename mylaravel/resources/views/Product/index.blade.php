@@ -23,7 +23,7 @@
         </div>
     </form>
 
-    @if(session('success'))
+    @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
@@ -39,8 +39,8 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($categories as $category)
-                @foreach($category->products as $product)
+            @foreach ($categories as $category)
+                @foreach ($category->products as $product)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $category->name }}</td>
@@ -54,11 +54,11 @@
 @endsection
 
 @section('scripts')
-<script>
-    $(document).ready(function(){
-        var count = 1;
-        $('#btn-add-product').on('click', function(){
-            $("#add-product").append(`
+    <script>
+        $(document).ready(function() {
+            var count = 1;
+            $('#btn-add-product').on('click', function() {
+                $("#add-product").append(`
             <div class="mt-3 col-6">
                 <label class="form-label product-label">${count++}. Product Name
                     <button type="button" class="btn btn-danger btn-delete-product">ลบ</button>
@@ -66,11 +66,11 @@
                 <input type="text" name="product_name[]" class="form-control" required>
             </div>
             `)
-        })
+            })
 
-        $(document).on('click','.btn-delete-product', function(){
-            $(this).parent().parent().remove();
-        })
-    });
-</script>
+            $(document).on('click', '.btn-delete-product', function() {
+                $(this).parent().parent().remove();
+            })
+        });
+    </script>
 @endsection

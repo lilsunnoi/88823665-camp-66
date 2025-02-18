@@ -31,8 +31,3 @@ Route::post('/product', [ProductController::class, 'add_product'])->name('produc
 // MyController Routes
 Route::get('/mycontroller/{id?}', [MyController::class, 'myfunction']);
 Route::post('/mycontroller/{id?}', [MyController::class, 'MYFUNCTION']);
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/product', [ProductController::class, 'index'])->name('product.index');
-    Route::post('/product', [ProductController::class, 'add_product'])->name('product.add');
-});

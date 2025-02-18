@@ -11,10 +11,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        // ดึงข้อมูล Categories พร้อมกับ Products ที่เกี่ยวข้อง
         $categories = Category::with('products')->get();
-
-        // คืนค่าข้อมูลไปยัง View
         return view('product.index', compact('categories'));
     }
 
@@ -38,9 +35,7 @@ class ProductController extends Controller
                 'user_id' => auth()->id(), // ใช้ user ที่ login
             ]);
         }
-        // รีเฟรชหน้าและแสดงข้อความสำเร็จ
+
         return redirect()->route('product.index')->with('success', 'Product added successfully');
     }
 }
-
-
