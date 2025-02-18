@@ -12,29 +12,22 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function login(Request $req)
+    public function login(Request $request)
     {
-        $credentials = $req->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $req->session()->regenerate();
-            $req->session()->flash('status', 'Login successful!');
-            return redirect()->intended('/users');
+            return redirect()->intended('users');
         }
 
-        $req->session()->flash('error', 'อีเมลหรือรหัสผ่านไม่ถูกต้อง');
-        return back()->onlyInput('email');
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 
-    public function logout(Request $req)
+    public function logout()
     {
         Auth::logout();
-        $req->session()->invalidate();
-        $req->session()->regenerateToken();
-        $req->session()->flash('status', 'Logout successful!');
         return redirect('/login');
     }
 }
