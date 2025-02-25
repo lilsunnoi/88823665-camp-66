@@ -16,16 +16,17 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('users');
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
+            // Authentication passed...
+            return redirect()->intended('/users');
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+        return redirect()->back()->withErrors([
+            'error' => 'The provided credentials do not match our records.',
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
         return redirect('/login');
