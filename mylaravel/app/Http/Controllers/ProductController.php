@@ -3,39 +3,55 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\Category;
+
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Category;
+use App\Models\ProductList;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $categories = Category::with('products')->get();
-        return view('product.index', compact('categories'));
+        $users = User::all();
+        $categories = Category::all();
+        $products = ProductList::with('category', 'user')->get();
+
+        return view('product', compact('categories', 'products', 'users'));
     }
 
-    public function add_product(Request $request)
-    {
-        // Validate the request
-        $request->validate([
-            'category' => 'required|string|max:255',
-            'product_name' => 'required|array',
-            'product_name.*' => 'required|string|max:255',
-        ]);
+    public function insert(Request $req)
+{
+    // Validate the request
+    $req->validate([
+        'category_name' => 'required|string|max:255',
+        'product_name' => 'required|array',
+        'product_name.*' => 'required|string|max:255',
+    ]);
 
-        // สร้าง Category ถ้ายังไม่มี
-        $category = Category::firstOrCreate(['name' => $request->category]);
+    // Create a new category
+    $category = new Category();
+    $category->name = $req->category_name;
+    $category->save();
 
-        // เพิ่ม Product
-        foreach ($request->product_name as $productName) {
-            Product::create([
-                'name' => $productName,
-                'category_id' => $category->id,
-                'user_id' => auth()->id(), // ใช้ user ที่ login
-            ]);
-        }
+    // Retrieve the authenticated user
+    $user = Auth::user();
 
-        return redirect()->route('product.index')->with('success', 'Product added successfully');
+    // Check if user is authenticated
+    if (!$user) {
+        return redirect('/login')->withErrors('You must be logged in to add products.');
     }
+
+    // Loop through each product name and create a new product
+    foreach ($req->product_name as $value) {
+        $product = new ProductList();
+        $product->name = $value;
+        $product->category_id = $category->id;
+        $product->user_id = $user->id;
+        $product->save();
+    }
+
+    // Redirect to the products page
+    return redirect('/products')->with('success', 'Products added successfully.');
+}
 }
