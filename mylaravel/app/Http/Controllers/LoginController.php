@@ -3,32 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+use App\Models\User;
 
 class LoginController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         return view('login');
     }
 
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials, $request->filled('remember'))) {
-            // Authentication passed...
-            return redirect()->intended('/users');
+    public function login(Request $req){
+        // print_r($req->input());
+        $user = User::where('email', $req->email)->first();
+        print_r($user);
+        if($user != null && Hash::check($req->password, $user->password)){
+            $req->session()->put('user', $user);
+            return redirect('/users');
+        }else {
+            $req->session()->flash('error', 'กรุณาตรวจสอบข้อมูลอีกครั้ง!');
+            return redirect('/login');
         }
-
-        return redirect()->back()->withErrors([
-            'error' => 'The provided credentials do not match our records.',
-        ]);
     }
 
-    public function logout(Request $request)
-    {
-        Auth::logout();
+    public function logout(Request $req){
+        // $req->session()->forget('user');
+        $req->session()->flush();
         return redirect('/login');
     }
 }
