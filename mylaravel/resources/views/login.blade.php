@@ -1,3 +1,4 @@
+<!-- filepath: /C:/xampp/htdocs/88823665-camp-66/mylaravel/resources/views/login.blade.php -->
 @extends('layouts.default')
 
 @section('content')
@@ -21,7 +22,6 @@
                 @endif
                 <form action="{{ route('login') }}" method="post">
                     @csrf
-                    @method('post')
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control" placeholder="Email" required />
                         <div class="input-group-text"><span class="bi bi-envelope"></span></div>

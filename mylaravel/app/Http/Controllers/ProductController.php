@@ -30,8 +30,13 @@ class ProductController extends Controller
             $product = new ProductList();
             $product->name = $value;
             $product->category_id = $category->id;
-            $product->user_id = session('user')->id;
-            $product->save();
+            if (session()->has('user')) {
+                $product->user_id = session('user')->id;
+                $product->save();
+            } else {
+                // Handle the case where the session user is not set
+                return redirect('/product')->withErrors('User session not found.');
+            }
         }
         return redirect('/product');
     }

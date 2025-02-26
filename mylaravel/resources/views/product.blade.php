@@ -1,40 +1,38 @@
 @extends('layouts.default_with_menu')
 
 @section('content')
-    <div class="m-5">
+    <div class="container my-5">
         <form action="{{ route('insert') }}" method="post">
             @csrf
-            <div class="row">
-                <div class="col-6">
-                    <div class="mb-3">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="form-group">
                         <label for="category" class="form-label">Category Name</label>
-                        <input type="text" name="category_name" class="form-control" id="category">
+                        <input type="text" name="category_name" class="form-control" id="category" required>
                     </div>
                 </div>
             </div>
-            <button type="button" id="btn-add-product" class="btn btn-primary">
+            <button type="button" id="btn-add-product" class="btn btn-primary mb-3">
                 + เพิ่ม product
             </button>
-            <div class="row" id='add-product'>
-
-            </div>
-            <div class="mt-3 row">
+            <div class="row" id="add-product"></div>
+            <div class="row mt-3">
                 <button class="btn btn-success" type="submit">บันทึก</button>
             </div>
         </form>
-        <table class="mt-3 table">
-            <thead>
+        <table class="table table-striped mt-4">
+            <thead class="thead-dark">
                 <tr>
-                    <td>#</td>
-                    <td>Category Name</td>
-                    <td>Product Name</td>
-                    <td>User Name</td>
+                    <th>#</th>
+                    <th>Category Name</th>
+                    <th>Product Name</th>
+                    <th>User Name</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($products as $index => $product)
                     <tr>
-                        <td>{{ $index+1 }}</td>
+                        <td>{{ $index + 1 }}</td>
                         <td>{{ $product->category->name }}</td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->user->name }}</td>

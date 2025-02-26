@@ -28,10 +28,11 @@
         integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI=" crossorigin="anonymous" />
     <!--end::Third Party Plugin(Bootstrap Icons)-->
     <!--begin::Required Plugin(AdminLTE)-->
-
-    <!-- <link rel="stylesheet" href="../../../dist/css/adminlte.css" /> -->
     <link rel="stylesheet" href="{{ url('public/css/adminlte.css') }}" />
     <!--end::Required Plugin(AdminLTE)-->
+    <!--begin::Custom CSS-->
+    <link rel="stylesheet" href="{{ url('public/css/custom.css') }}" />
+    <!--end::Custom CSS-->
     @yield('styles')
 </head>
 <!--end::Head-->
@@ -49,11 +50,11 @@
                         <strong>คุณเข้าสู่ระบบเป็น:</strong> {{ Auth::user()->name }} ({{ Auth::user()->email }})
                     </div>
                 @endif
-                <div class="app-content">
+                <div class="app-content container mt-4">
                     @yield('content')
                 </div>
                 <!-- เพิ่มปุ่ม Logout -->
-                <div class="mb-3">
+                <div class="mb-3 text-center">
                     <form action="{{ route('logout') }}" method="POST" id="logout-form">
                         @csrf
                         <button type="submit" class="btn btn-danger">Logout</button>
